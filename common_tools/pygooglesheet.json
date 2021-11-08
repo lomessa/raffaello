@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "bustling-bot-328907",
+  "private_key_id": "5fa066776bfcc49bcab17bf13045df4e1eca996c",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCzMfh+sSzEHbpm\nQbMk80yGyLI1cuvm/XToyaJzzmA0YfyyS+rJe8xi5IP763H2X0bgE1aE2PWh553F\nyllEtLMNqjmKCtzjAl11wAd+X8t9ugRcqoCILhoSZmYLOkm38KiwSlJNpjRAwcLY\njnHhSGo9DLAgnJ7LjwoLjPuXNFM6BH34Bxs0NoLx0eYO84EACv4YPeN4onhbUKGs\nlP2iMfXjyBDsi8rT6OyW5nl1SGIMYdvkfK2+VFCRwUJrDRmeLUmGj4AObqdu9oIO\nRcYABLlUadg3XxmmKOyHqLMvVZu/i+fypXBqC8fUinwOR6HxT4Yv+/HQHix4Kkeo\n2sC1Y3vtAgMBAAECggEACdqTxhplvPZqM3OlxMCQ8uZ4D5gICzXhJxM+GNfT6Cgt\nQPwLZ1SkmsQ4fR1nhmXwhqOO7JOQ/6a2Fn7NOt8kQM+dW2Ruh23astNs9hDm0T1D\nPnntGHqkhLeBzANCs4KLMX/cwm1YeT55Fvck9v+dlp7V0+1DjtZeSzVPo8hvp9nT\nWcMSOYhW+RCgVI6TZdDD5PXRd60rK1b7dKkkRVj+zJyT9cCNwLV51t3y85eQtJh0\nepOt8LRZ+ARI1z/eJkDOn8VF87V7ZStBdikd/8z/MauKQhtjeA4Vi/MRSfsrBJjh\nNSUDuDxOX5FGQ6kplaEpB5+wRzO4k5n6F2yh2gah0QKBgQDva13KERzoRiBUYPEz\ndiolVA7NdKOKHDbKG9tIpoENfYzSwh1VwErLX3eQf65fBV3+irJ2j82pP8bQ+dnU\nXH3HKn/tywcIzY5t2ApED02/ny2GlpOKC/6N+rkKu309QoTbv9tJjuVYtI1iT86s\nePHkzUHy71XVCJ+6HDaPJ7UJRQKBgQC/muXRAWOcZOZVCbXrVvtN7F/5sk6ktlvW\nMZQNGnpUjhpWI/RVzWgUhjDrtwq2TzwkpPg+zXiHZi6FslxJ8ruVBkrz+U6/9YaI\nNPXGYIBNWinRt+IS5EBxOwAfDfu+rN2HibWeziwoEyT5qg4Uli7pzEgV2p1JPcDe\nmJVHupzOiQKBgCZYC61REFAi6wqYfAjB4/4WeEhvZcG4ww2baIM6J3EBqowWipwx\nL8ligMOjr0mIkoUxsWNLpKR2kmDlov1f0sUTCWoMGhRO14DAGOTNjqYh2Ci19Osn\nAJ28ieYuIOCuxphrIbOmLxUF1Z7pKTB2Lkd2mBlQO27i8rHb0uEaeuQBAoGBAKoo\nTHntauHj9W2Fvyotx+Wuypj8Ub0TOcGhq+JrJkJbJGZlbcKZNRotBdr/ZiL7gOTm\nIJPdc3GDPEN9X1pIl2/D8+JxAA+XYw8pQS8YWjjXnpXhYIL4c4ZbKENr7qqp595L\nXKCYZjx8q/SQogqESUtWIJpP2CjID7Ve+guGXWVJAoGAH5GFAKT4PHeOPFayuAbH\nVbXdGQUnmL0X1tGAQ03fRMX2Sl58qXjNOcltRDo/pXhw2wIio8UtR/gMQwJalvvn\nz/sa+aiOpChT1A2EPlnjU9TJZ9GZsoGbvpWh25mbepH/C/uFBScORLInfxTQylMu\nNtovvJ7+DB5C4tZ3rRRaM5g=\n-----END PRIVATE KEY-----\n",
+  "client_email": "pygooglesheet@bustling-bot-328907.iam.gserviceaccount.com",
+  "client_id": "115833441639409984653",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/pygooglesheet%40bustling-bot-328907.iam.gserviceaccount.com"
+}
