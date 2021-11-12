@@ -32,7 +32,7 @@ if __name__ == '__main__':
     parser.add_argument("-otf","--output_file",help="specify the output file")
     parser.add_argument("-c","--command", choices=['sample_by_weight','sample_by_odds'])
     parser.add_argument("-l1","--sample_line", type=int,default=0)
-    parser.add_argument("-l2","--weight_line", type=int,default=1)
+    parser.add_argument("-l2","--weight_line", type=int,default=1, help='specify the weight column')
     parser.add_argument("-s","--sample_size",type=int,default=100)
     parser.add_argument("-t","--type", choices=['replace','no_replace'], default='replace', help='replace:有放回,no_replace:无放回')
     args = parser.parse_args()
@@ -46,7 +46,14 @@ if __name__ == '__main__':
             if args.sample_line == 0:
                 candis.append(line.strip())
             else:
-                candis.append(terms[args.wsample_line-1])
+                candis.append(terms[args.sample_line-1])
+            if len(terms) < args.weight_line:
+                continue
+            weight = 0
+            try:
+                float(terms[args.weight_line - 1])
+            except Exception:
+                continue
             weights.append(float(terms[args.weight_line-1]))
 
     select_samples = []

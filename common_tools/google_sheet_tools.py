@@ -4,8 +4,7 @@ import pandas as pd
 import os
 import sys
 
-root = os.path.split(os.path.realpath(__file__))[0]
-sys.path.append(root)
+cur_path =  os.path.dirname(__file__)
 
 from normalize import *
 
@@ -13,6 +12,41 @@ from normalize import *
 
 
 all_ner_types = ["DISH", "STORE", "BRAND", "CATEGORY", "LOCATION", "COOK", "INGREDIENT"]
+
+
+def get_first_empty_colum(sheet):
+    row_num = sheet.rows
+    i=0
+    drange = DataRange(start='A1', end='A' + str(row_num), worksheet=sheet)
+    while i<row_num:
+        cur_text = drange.cells[i][0].value_unformatted
+        if cur_text != "":
+            i = i + 1
+        else:
+            break
+    return i+1
+
+def delet_data(name,delet_items):
+    # cur_items = list(get_sheet_by_name(name))
+    # reserved_items = []
+    # for item in cur_items:
+    #     if item not in delet_items:
+    #         reserved_items.append(item)
+    # df = pd.DataFrame(reserved_items.sort())
+    # df[2] = name
+    delet_rows = []
+    cur_sheet = sh.worksheet_by_title(name)
+    row_num = cur_sheet.rows
+    drange = DataRange(start='A1', end='A' + str(row_num), worksheet=cur_sheet)
+    flag = 0
+    for i in range(row_num):
+        cur_text = drange.cells[i][0].value_unformatted
+        if cur_text in delet_items:
+            delet_rows.append(i-flag+1)
+            flag = flag + 1
+    for row in delet_rows:
+        cur_sheet.delete_rows(row,number=1)
+
 
 def get_sheet_by_name(name,need_normlize=True):
     entitys = set([])
@@ -32,22 +66,11 @@ def get_sheet_by_name(name,need_normlize=True):
     return entitys
 
 def upload_data_by_name(name,addterms,normlize=True):
-    # cur_res = get_sheet_by_name(name)
-    # try:
-    #     wks = sh.worksheet_by_title(name)
-    # except:
-    #     wks =  sh.add_worksheet(name)
-    # for term in addterms:
-    #     cur_res.add(term)
-    # newdf = pd.DataFrame(list(cur_res).sort())
-    # wks.clear()
-    # wks.set_dataframe(newdf,(1,1),fit=True,nan="")
-
     adddf = pd.DataFrame(addterms)
+    adddf[2] = name
     try:
         wks = sh.worksheet_by_title(name)
-
-        row_num = wks.rows
+        row_num = get_first_empty_colum(wks)
         wks.set_dataframe(adddf,(row_num,1),fit=True,nan="",copy_head=False)
     except:
         wks = sh.add_worksheet(name,rows=len(adddf)+1,cols=20)
@@ -56,16 +79,16 @@ def upload_data_by_name(name,addterms,normlize=True):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument("-tn","--table_name")
-    parser.add_argument("-itf","--input_file")
+    parser.add_argument("-tn",  "--table_name")
+    parser.add_argument("-itf", "--input_file")
     parser.add_argument("-otf", "--output_file", help="specify the output file")
-    parser.add_argument("-c", "--command", choices=['load', 'upload'],default="load")
-    parser.add_argument("-nt", "--ner_type", default="all")
-    parser.add_argument("-nn","--need_normlize",type=bool,default=True)
-    parser.add_argument("-t", "--type", choices=['none', 'excel'], default='none', help='下载文件格式')
+    parser.add_argument("-c",   "--command", choices=['load', 'upload', 'delete'],default="load")
+    parser.add_argument("-nt",  "--ner_type", default="all")
+    parser.add_argument("-nn",  "--need_normlize", type=bool,default=True)
+    parser.add_argument("-t",   "--type", choices=['none', 'excel'], default='none', help='下载文件格式')
     args = parser.parse_args()
 
-    client = pygsheets.authorize(service_file="common_tools/pygooglesheet.json")
+    client = pygsheets.authorize(service_file=os.path.join(cur_path,"pygooglesheet.json"))
     sh = client.open(args.table_name)
 
     if args.command == "load":
@@ -96,6 +119,20 @@ if __name__ == '__main__':
                     toadd[terms[1]] = [terms[0]]
         for k in toadd.keys():
             upload_data_by_name(k,toadd[k])
+    elif args.command == "delete":
+        todelet = {}
+        with codecs.open(args.input_file, 'r', 'utf-8') as reader:
+            for line in reader.readlines():
+                terms = line.strip().split("\t")
+                if len(terms) != 2:
+                    continue
+                if terms[1] in todelet:
+                    todelet[terms[1].strip()].append(terms[0].strip())
+                else:
+                    todelet[terms[1].strip()] = [terms[0].strip()]
+        for k in todelet.keys():
+            delet_data(k,todelet[k])
+
 
 
 

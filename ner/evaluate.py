@@ -33,9 +33,11 @@ if __name__ == '__main__':
     ansdict,curdict ={"STORE":[]
                       ,"DISH":[],"CATEGORY":[],"LOCATION":[]},{"STORE":[]
                       ,"DISH":[],"CATEGORY":[],"LOCATION":[]}
-    with codecs.open('/Users/zihe.zhan/Workspace/py_script/ner/ner_benchmark_res08','r','utf-8') as reader:
+    with codecs.open('/Users/zihe.zhan/Workspace/py_script/ner/ner_benchmark_res11','r','utf-8') as reader:
         number = 1
         for line in reader.readlines():
+            if number > 200:
+                continue
             terms = line.strip().split("\t")
             ans,res = [],[]
             if len(terms) > 1:
@@ -44,18 +46,20 @@ if __name__ == '__main__':
                 res = terms[2].strip().split(",")
             for a in ans:
                 if a!="":
-                    typens = set(a.strip().split("|")[1].split("\1"))
+                    typens = a.strip().split("|")[1:]
                     for typen in typens:
                         if typen not in ansdict:
                             continue
                         ansdict[typen ].append(str(number) + a.strip().split("|")[0])
             for a in res:
                 if a!="":
-                    typens = set(a.strip().split("|")[1].split("\1"))
+                    typens = a.strip().split("|")[1:]
                     for type in typens:
                         if typen not in ansdict:
                             continue
                         curdict[typen].append(str(number) + a.strip().split("|")[0])
+            number = number  + 1
+
     evaluate_ner(curdict,ansdict)
 
 
